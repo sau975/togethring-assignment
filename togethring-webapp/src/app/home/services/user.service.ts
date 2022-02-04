@@ -10,7 +10,12 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getUsers() {
-    return this.http.get<any>('https://reqres.in/api/users');
+  getFirstPageUsers() {
+    return this.http.get<any>('https://reqres.in/api/users?page=1');
   }
+
+  getSecondPageUsers() {
+    return this.http.get<any>('https://reqres.in/api/users?page=2');
+  }
+
 }

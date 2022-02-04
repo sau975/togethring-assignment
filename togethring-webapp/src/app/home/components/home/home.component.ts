@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/login/services/auth.service';
 import { IRegistration } from 'src/app/registration/interfaces/registration';
 import { MenuItem } from 'primeng/api';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +15,12 @@ export class HomeComponent implements OnInit {
 
   search!:string;
   userDetails!: IRegistration;
-  users!:any[];
+  users:any[]=[];
   user:any;
   items!: MenuItem[];
   newMessage!: string;
-  display: boolean = false;
+  displayRightSideBar: boolean = false;
+  displayLeftSideBar: boolean = true;
   showEmojiPicker = false;
   sets = [
     'native',
@@ -53,11 +55,22 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    forkJoin([
+      this.userService.getFirstPageUsers(),
+      this.userService.getSecondPageUsers()
+    ]).subscribe(result =>{
+      let firstPageUsers:any[] = result[0].data;
+      let secondPageUsers:any[] = result[1].data;
+      firstPageUsers.forEach(user => {
+        this.users.push(user);
+      });
+      secondPageUsers.forEach(user => {
+        this.users.push(user);
+      });
+    })
+
     let user:any = localStorage.getItem('user');
     this.userDetails = JSON.parse(user);
-    this.userService.getUsers().subscribe(res => {
-      this.users = res.data;
-    });
 
     this.items = [
       {
@@ -82,7 +95,7 @@ export class HomeComponent implements OnInit {
   }
 
   openChat(user:any){
-    this.display = true;
+    this.displayRightSideBar = true;
     this.user = user;
   }
 

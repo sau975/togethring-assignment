@@ -5,7 +5,6 @@
   padding: 20px 10px;
 }
 
-
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (max-width: 500px) {
   .header a {
@@ -22,4 +21,9 @@ img {
   border-radius: 50%;
   height: 10%;
   width: 10%;
+}
+
+.user-list {
+  max-height: 70%;
+  overflow-y: scroll;
 }

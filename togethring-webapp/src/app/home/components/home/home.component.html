@@ -1,19 +1,19 @@
-<div class="row">
-  <div class="col-md-4">
-    <div class="header">
-      <div style="float: right;">
-        <button #btn type="button" pButton (click)="menu.toggle($event)"><i class="pi pi-ellipsis-v"></i></button>
-        <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
-      </div>
-      <div>
-        <a [routerLink]="'/profile'"><img src="/assets/img_avatar.png" alt="Avatar"></a>
-        <p>{{userDetails.userName}}</p>
-      </div>
-      <div>
-        <input id="search" type="text" name="search" placeholder="search name..." class="form-control float-right" [(ngModel)]='search'>
-      </div>
+<p-sidebar [(visible)]="displayLeftSideBar" position="left" [modal]="false" [showCloseIcon]="false" p-sidebar-full>
+  <div class="header">
+    <div style="float: right;">
+      <button #btn type="button" pButton (click)="menu.toggle($event)"><i class="pi pi-ellipsis-v"></i></button>
+      <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
     </div>
+    <div>
+      <a [routerLink]="'/profile'"><img src="/assets/img_avatar.png" alt="Avatar"></a>
+      <p>{{userDetails.userName}}</p>
+    </div>
+    <div>
+      <input id="search" type="text" name="search" placeholder="search name..." class="form-control float-right" [(ngModel)]='search'>
+    </div>
+  </div>
 
+  <div class="user-list">
     <div *ngFor="let user of users | filter: search">
       <div (click)="openChat(user)">
         <p><img [src]="user.avatar"> {{user.first_name}} {{user.last_name}} {{user.email}}</p>
@@ -21,16 +21,15 @@
       </div>
     </div>
   </div>
-  <div class="col-md-8">
-    <p-sidebar [(visible)]="display" position="right" [modal]="false">
-      <legend *ngIf="user">{{user.first_name}} {{user.last_name}}</legend> <br>
-      <p style="text-align: right;">Hi...</p>
-      <p style="text-align: right;">How are you?</p>
-      <input placeholder="Type a message" type="text" (blur)="onBlur()" (focus)="onFocus()" [(ngModel)]="newMessage">
-      <button (click)="toggleEmojiPicker()"> 😀</button><br>
-      <emoji-mart class="emoji-mart" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
-      <button class="btn btn-success mt-3" type="button" (click)="send()">Send</button>
-    </p-sidebar>
-  </div>
-</div>
+</p-sidebar>
+
+<p-sidebar [(visible)]="displayRightSideBar" position="right" [modal]="false">
+  <legend *ngIf="user">{{user.first_name}} {{user.last_name}}</legend> <br>
+  <p style="text-align: right;">Hi...</p>
+  <p style="text-align: right;">How are you?</p>
+  <input placeholder="Type a message" type="text" (blur)="onBlur()" (focus)="onFocus()" [(ngModel)]="newMessage">
+  <button (click)="toggleEmojiPicker()"> 😀</button><br>
+  <emoji-mart class="emoji-mart" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+  <button class="btn btn-success mt-3" type="button" (click)="send()">Send</button>
+</p-sidebar>
 
