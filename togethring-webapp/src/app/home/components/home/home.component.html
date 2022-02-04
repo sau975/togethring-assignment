@@ -10,7 +10,7 @@
         <p>{{userDetails.userName}}</p>
       </div>
       <div>
-        <input id="search" type="text" name="search" placeholder="search name..." class="form-control float-right" [(ngModel)]='search' autofocus>
+        <input id="search" type="text" name="search" placeholder="search name..." class="form-control float-right" [(ngModel)]='search'>
       </div>
     </div>
 
@@ -26,8 +26,11 @@
       <legend *ngIf="user">{{user.first_name}} {{user.last_name}}</legend> <br>
       <p style="text-align: right;">Hi...</p>
       <p style="text-align: right;">How are you?</p>
-      <input [(ngModel)]="newMessage">
+      <input placeholder="Type a message" type="text" (blur)="onBlur()" (focus)="onFocus()" [(ngModel)]="newMessage">
+      <button (click)="toggleEmojiPicker()"> 😀</button><br>
+      <emoji-mart class="emoji-mart" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
       <button class="btn btn-success mt-3" type="button" (click)="send()">Send</button>
     </p-sidebar>
   </div>
 </div>
+

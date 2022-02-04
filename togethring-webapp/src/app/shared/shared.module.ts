@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {DialogModule} from 'primeng/dialog';
-import {TieredMenuModule} from 'primeng/tieredmenu';
-import {SidebarModule} from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { SidebarModule } from 'primeng/sidebar';
 import { FilterPipe } from './pipes/filter.pipe';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [FilterPipe],
@@ -14,7 +15,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     ReactiveFormsModule,
     DialogModule,
     TieredMenuModule,
-    SidebarModule
+    SidebarModule,
+    PickerModule
   ],
   exports: [
     FormsModule,
@@ -22,7 +24,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     DialogModule,
     TieredMenuModule,
     SidebarModule,
-    FilterPipe
+    FilterPipe,
+    PickerModule
   ]
 })
 export class SharedModule { }

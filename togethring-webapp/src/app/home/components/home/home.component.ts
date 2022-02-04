@@ -19,6 +19,17 @@ export class HomeComponent implements OnInit {
   items!: MenuItem[];
   newMessage!: string;
   display: boolean = false;
+  showEmojiPicker = false;
+  sets = [
+    'native',
+    'google',
+    'twitter',
+    'facebook',
+    'emojione',
+    'apple',
+    'messenger'
+  ]
+  set:any;
 
   private _getMessage!:IMessage;
   get getMessage():IMessage{
@@ -81,6 +92,31 @@ export class HomeComponent implements OnInit {
       message: this.newMessage
     }
     this.getMessage = message;
+  }
+
+  toggleEmojiPicker() {
+    console.log(this.showEmojiPicker);
+    this.showEmojiPicker = !this.showEmojiPicker;
+  }
+
+  addEmoji(event:any) {
+    console.log(this.newMessage)
+    const { newMessage } = this;
+    console.log(newMessage);
+    console.log(`${event.emoji.native}`)
+    const text = `${newMessage}${event.emoji.native}`;
+
+    this.newMessage = text;
+    // this.showEmojiPicker = false;
+  }
+
+  onFocus() {
+    console.log('focus');
+    this.showEmojiPicker = false;
+  }
+
+  onBlur() {
+    console.log('onblur')
   }
 
 }
