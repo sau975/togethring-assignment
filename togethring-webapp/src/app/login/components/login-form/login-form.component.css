@@ -1,3 +1,10 @@
 .error {
   color: red;
 }
+
+.loginBox {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+}

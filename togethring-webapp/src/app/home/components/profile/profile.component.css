@@ -1,5 +1,5 @@
 div {
-  width: 300px;
+  width: 40%;
   border: 15px solid green;
   padding: 50px;
   margin: 20px;
@@ -7,4 +7,11 @@ div {
 
 a {
   margin-left: 20px;
+}
+
+.user-details {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
 }
