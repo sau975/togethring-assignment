@@ -1,5 +1,5 @@
 import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/login/services/auth.service';
 import { IRegistration } from 'src/app/registration/interfaces/registration';
@@ -11,13 +11,33 @@ import { forkJoin } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewChecked {
 
+  @ViewChild('scroll') scroll!: ElementRef;
   search!:string;
   userDetails!: IRegistration;
   users:any[]=[];
   user:any;
   items!: MenuItem[];
+  messages: any[]=[
+    "Hi",
+    "I am a Saurav",
+    "How are You?",
+    "let me know",
+    "when you are available",
+    "I am good",
+    "are you coming today?",
+    "are you there?",
+    "i am going to office",
+    "will let you know",
+    "tomorrow is my birthday",
+    "do't forgot to wish me",
+    "we will meet tomorrow",
+    "at 4 o'clock",
+    "ok",
+    "bye",
+    "see you tomorrow"
+  ];
   newMessage!: string;
   displayRightSideBar: boolean = false;
   displayLeftSideBar: boolean = true;
@@ -55,6 +75,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.scrollToBottom();
     forkJoin([
       this.userService.getFirstPageUsers(),
       this.userService.getSecondPageUsers()
@@ -89,6 +110,16 @@ export class HomeComponent implements OnInit {
     ]
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
+    } catch(err) { }
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
@@ -105,31 +136,22 @@ export class HomeComponent implements OnInit {
       message: this.newMessage
     }
     this.getMessage = message;
+    this.messages.push(this.newMessage);
+    this.newMessage = "";
   }
 
   toggleEmojiPicker() {
-    console.log(this.showEmojiPicker);
     this.showEmojiPicker = !this.showEmojiPicker;
   }
 
   addEmoji(event:any) {
-    console.log(this.newMessage)
-    const { newMessage } = this;
-    console.log(newMessage);
-    console.log(`${event.emoji.native}`)
-    const text = `${newMessage}${event.emoji.native}`;
-
+    const text = `${event.emoji.native}`;
     this.newMessage = text;
-    // this.showEmojiPicker = false;
-  }
-
-  onFocus() {
-    console.log('focus');
     this.showEmojiPicker = false;
   }
 
-  onBlur() {
-    console.log('onblur')
+  onFocus() {
+    this.showEmojiPicker = false;
   }
 
 }
