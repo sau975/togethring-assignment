@@ -13,7 +13,9 @@ import { forkJoin } from 'rxjs';
 })
 export class HomeComponent implements OnInit, AfterViewChecked {
 
+  startPoint!:any;
   @ViewChild('scroll') scroll!: ElementRef;
+  @ViewChild('input') input!: ElementRef;
   search!:string;
   userDetails!: IRegistration;
   users:any[]=[];
@@ -116,6 +118,11 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     this.scrollToBottom();
   }
 
+  findPointOfMessage(){
+    var ctl = this.input.nativeElement;
+    this.startPoint = ctl.selectionStart;
+  }
+
   scrollToBottom(): void {
     try {
       this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
@@ -147,8 +154,8 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   addEmoji(event:any) {
-    const text = `${this.newMessage}${event.emoji.native}`;
-    this.newMessage = text;
+    var buildNewMessage = [this.newMessage.slice(0, this.startPoint), event.emoji.native, this.newMessage.slice(this.startPoint)].join('');
+    this.newMessage = buildNewMessage;
     this.showEmojiPicker = false;
   }
 
