@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     "bye",
     "see you tomorrow"
   ];
-  newMessage!: string;
+  newMessage: string = "";
   displayRightSideBar: boolean = false;
   displayLeftSideBar: boolean = true;
   showEmojiPicker = false;
