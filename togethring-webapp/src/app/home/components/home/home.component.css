@@ -15,10 +15,3 @@ img {
   overflow-y: scroll;
 }
 
-
-ul{
-  height: 100px;
-  width: 200px;
-  overflow-y: scroll;
-  border: 1px solid #000;
- }

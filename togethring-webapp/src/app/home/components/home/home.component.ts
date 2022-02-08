@@ -19,12 +19,14 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   users:any[]=[];
   user:any;
   items!: MenuItem[];
-  messages: any[]=[
+  incomingMessages: any[]=[
     "Hi",
     "I am Saurav",
     "How are You?",
     "let me know",
     "when you are available",
+  ];
+  outGoingMessages: any[]=[
     "I am good",
     "are you coming today?",
     "are you there?",
@@ -136,7 +138,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
       message: this.newMessage
     }
     this.getMessage = message;
-    this.messages.push(this.newMessage);
+    this.outGoingMessages.push(this.newMessage);
     this.newMessage = "";
   }
 
