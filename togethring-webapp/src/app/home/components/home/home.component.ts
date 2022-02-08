@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   items!: MenuItem[];
   messages: any[]=[
     "Hi",
-    "I am a Saurav",
+    "I am Saurav",
     "How are You?",
     "let me know",
     "when you are available",
@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   addEmoji(event:any) {
-    const text = `${event.emoji.native}`;
+    const text = `${this.newMessage}${event.emoji.native}`;
     this.newMessage = text;
     this.showEmojiPicker = false;
   }

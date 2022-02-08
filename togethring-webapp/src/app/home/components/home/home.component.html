@@ -27,7 +27,7 @@
   <p-sidebar [style]="{'width':'60%'}" [(visible)]="displayRightSideBar" position="right" [modal]="false">
     <legend *ngIf="user">{{user.first_name}} {{user.last_name}}</legend> <br>
     <div #scroll style="height: 80%; overflow: scroll;">
-      <p style="text-align: right;" *ngFor="let message of messages;">{{message}}</p>
+      <p style="text-align: right; margin-right: 10px;" *ngFor="let message of messages;">{{message}}</p>
       <emoji-mart class="emoji-mart" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
     </div>
 
